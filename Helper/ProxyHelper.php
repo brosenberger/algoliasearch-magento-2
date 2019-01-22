@@ -70,6 +70,15 @@ class ProxyHelper
     }
 
     /**
+     * @return int
+     */
+    public function getPlanLevel()
+    {
+        // FIXME (get plan level from the proxy)
+        return 3;
+    }
+
+    /**
      * @param $data
      * @param $proxyMethod
      *
