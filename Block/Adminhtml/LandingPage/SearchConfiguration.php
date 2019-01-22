@@ -75,7 +75,13 @@ class SearchConfiguration extends \Magento\Backend\Block\Template
     public function getPlanLevel()
     {
         if ($this->planLevel == null) {
-            $this->planLevel = $this->proxyHelper->getPlanLevel();
+            $planLevel = 1;
+            $planLevelInfo = $this->proxyHelper->getInfo(ProxyHelper::INFO_TYPE_PLAN_LEVEL);
+
+            if (isset($planLevelInfo['plan_level'])) {
+                $planLevel = (int) $planLevelInfo['plan_level'];
+            }
+            $this->planLevel = $planLevel;
         }
 
         return $this->planLevel;
