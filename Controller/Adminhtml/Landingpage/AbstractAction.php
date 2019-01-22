@@ -62,7 +62,12 @@ abstract class AbstractAction extends \Magento\Backend\App\Action
      */
     public function dispatch(\Magento\Framework\App\RequestInterface $request)
     {
-        $planLevel = $this->proxyHelper->getPlanLevel();
+        $planLevel = 1;
+        $planLevelInfo = $this->proxyHelper->getInfo(ProxyHelper::INFO_TYPE_PLAN_LEVEL);
+
+        if (isset($planLevelInfo['plan_level'])) {
+            $planLevel = (int) $planLevelInfo['plan_level'];
+        }
 
         if ($planLevel <= 1) {
             $this->_response->setStatusHeader(403, '1.1', 'Forbidden');

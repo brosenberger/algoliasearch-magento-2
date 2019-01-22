@@ -10,6 +10,7 @@ class ProxyHelper
 
     const INFO_TYPE_EXTENSION_SUPPORT = 'extension_support';
     const INFO_TYPE_ANALYTICS = 'analytics';
+    const INFO_TYPE_PLAN_LEVEL = 'plan_level';
 
     /** @var ConfigHelper */
     private $configHelper;
@@ -39,8 +40,8 @@ class ProxyHelper
             'token' => $token,
         ];
 
-        if ($type === self::INFO_TYPE_ANALYTICS) {
-            $params['type'] = 'analytics';
+        if ($type !== self::INFO_TYPE_EXTENSION_SUPPORT) {
+            $params['type'] = $type;
         }
 
         $info = $this->postRequest($params, self::PROXY_URL_PARAM_GET_INFO);
@@ -66,15 +67,6 @@ class ProxyHelper
         }
 
         return false;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPlanLevel()
-    {
-        // FIXME (get plan level from the proxy)
-        return 3;
     }
 
     /**
