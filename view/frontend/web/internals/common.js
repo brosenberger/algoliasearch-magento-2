@@ -636,29 +636,29 @@ requirejs(['algoliaBundle'], function(algoliaBundle) {
 							// Handle categories facet
 							if (currentFacet.attribute == 'categories' && !algoliaConfig.isCategoryPage) {
 								map['hierarchicalMenu']['categories.level0'] = routeState['categories'] && routeState['categories'].split('~');
-                if (algoliaConfig.isLandingPage &&
-                  typeof map['hierarchicalMenu']['categories.level0'] === 'undefined' &&
-                  'categories.level0' in landingPageConfig) {
-                  map['hierarchicalMenu']['categories.level0'] = landingPageConfig['categories.level0'].split(' /// ');
-                }
+								if (algoliaConfig.isLandingPage &&
+									typeof map['hierarchicalMenu']['categories.level0'] === 'undefined' &&
+									'categories.level0' in landingPageConfig) {
+									map['hierarchicalMenu']['categories.level0'] = landingPageConfig['categories.level0'].split(' /// ');
+								}
 							}
 							// Handle sliders
 							if (currentFacet.type == 'slider') {
 								map['range'][currentFacet.attribute] = routeState[currentFacet.attribute] && routeState[currentFacet.attribute];
-                if (algoliaConfig.isLandingPage &&
-                  typeof map['range'][currentFacet.attribute] === 'undefined' &&
-                  currentFacet.attribute in landingPageConfig) {
+								if (algoliaConfig.isLandingPage &&
+									typeof map['range'][currentFacet.attribute] === 'undefined' &&
+									currentFacet.attribute in landingPageConfig) {
 
-                	var facetValue = '';
-                	if (typeof landingPageConfig[currentFacet.attribute]['>='] !== "undefined") {
-                    facetValue = landingPageConfig[currentFacet.attribute]['>='][0];
+									var facetValue = '';
+									if (typeof landingPageConfig[currentFacet.attribute]['>='] !== "undefined") {
+										facetValue = landingPageConfig[currentFacet.attribute]['>='][0];
 									}
-                  facetValue += ':';
-                  if (typeof landingPageConfig[currentFacet.attribute]['<='] !== "undefined") {
-                    facetValue += landingPageConfig[currentFacet.attribute]['<='][0];
-                  }
-                  map['range'][currentFacet.attribute] = facetValue;
-                }
+									facetValue += ':';
+									if (typeof landingPageConfig[currentFacet.attribute]['<='] !== "undefined") {
+										facetValue += landingPageConfig[currentFacet.attribute]['<='][0];
+									}
+									map['range'][currentFacet.attribute] = facetValue;
+								}
 							}
 						};
 					}

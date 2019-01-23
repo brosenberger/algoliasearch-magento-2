@@ -75,9 +75,9 @@ requirejs(['algoliaBundle','Magento_Catalog/js/price-utils'], function(algoliaBu
 			ruleContexts.push('magento-category-' + algoliaConfig.request.categoryId);
 		}
 
-    if (algoliaConfig.request.landingPageId.length > 0) {
-      ruleContexts.push('magento-landingpage-' + algoliaConfig.request.landingPageId);
-    }
+		if (algoliaConfig.request.landingPageId.length > 0) {
+			ruleContexts.push('magento-landingpage-' + algoliaConfig.request.landingPageId);
+		}
 		
 		var instantsearchOptions = {
 			appId: algoliaConfig.applicationId,
