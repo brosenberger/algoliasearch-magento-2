@@ -11,11 +11,11 @@ $isQueryRulesEnabled = true;
 $section = $this->getRequest()->getParam('section');
 
 if ($section === 'algoliasearch_cc_analytics') {
-	$isClickAnalyticsEnabled = $viewModel->isClickAnalyticsEnabled();
+    $isClickAnalyticsEnabled = $viewModel->isClickAnalyticsEnabled();
 }
 
 if ($section === 'algoliasearch_instant') {
-	$isQueryRulesEnabled = $viewModel->isQueryRulesEnabled();
+    $isQueryRulesEnabled = $viewModel->isQueryRulesEnabled();
 }
 
 $indexingQueueInfoUrl = $this->getUrl('algolia_algoliasearch/queue/info');
