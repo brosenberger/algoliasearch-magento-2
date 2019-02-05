@@ -59,6 +59,7 @@ class AdapterHelper
                     $searchParams,
                     $this->filtersHelper->getLandingPageFilters($storeId)
                 );
+                $algoliaQuery = $this->filtersHelper->getLandingPageQuery();
             }
 
             if (!is_null($this->filtersHelper->getRequest()->getParam('sortBy'))) {

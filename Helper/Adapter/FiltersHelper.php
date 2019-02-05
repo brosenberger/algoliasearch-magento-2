@@ -107,6 +107,22 @@ class FiltersHelper
     }
 
     /**
+     * Get current landing page query
+     *
+     * @return array
+     */
+    public function getLandingPageQuery()
+    {
+        $landingPage = $this->registry->registry('current_landing_page');
+        $landingPageQuery = '';
+        if ($landingPage) {
+            $landingPageQuery = $landingPage->getQuery();
+        }
+
+        return $landingPageQuery;
+    }
+
+    /**
      * Get the facet filters from the url or landing page configuration
      *
      * @param int $storeId
