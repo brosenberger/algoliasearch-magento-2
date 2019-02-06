@@ -38,6 +38,7 @@ $isConfig = [
 
 <div class="with-facets" id="algolia_instant_selector">
     <div class="merchandising-tutorial">
+        <div class="close-box">x</div>
         <div class="col-left">
             <h3>How does it work?</h3>
             <p>1. Enter the search query (keyword) that is the focus of your landing page. For example "weekender bag".</p>
@@ -765,7 +766,9 @@ $isConfig = [
         return ui;
       };
 
-
+      $(".close-box").click(function() {
+        $(this).parent().hide();
+      });
 
     });
   });
