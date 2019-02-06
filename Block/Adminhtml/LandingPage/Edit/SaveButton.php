@@ -9,7 +9,7 @@ class SaveButton extends AbstractButton implements ButtonProviderInterface
     public function getButtonData()
     {
         return [
-            'label' => __('Save Landing Page'),
+            'label' => __('Save landing page'),
             'class' => 'save primary',
             'data_attribute' => [
                 'mage-init' => ['button' => ['event' => 'save']],
