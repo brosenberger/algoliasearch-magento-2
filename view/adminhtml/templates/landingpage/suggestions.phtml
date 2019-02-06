@@ -1,4 +1,11 @@
 <?php
+
+/** @var $this \Algolia\AlgoliaSearch\Block\Adminhtml\BaseAdminTemplate */
+
+/** @var \Algolia\AlgoliaSearch\ViewModel\Adminhtml\Landingpage\Suggestions $view */
+$view = $this->getViewModel();
+
+$emptyStateIllustration = $this->getViewFileUrl('Algolia_AlgoliaSearch::images/illu-lpb.svg');
 $bookIllustration = $this->getViewFileUrl('Algolia_AlgoliaSearch::images/icon-book.svg');
 ?>
 
@@ -8,3 +15,11 @@ $bookIllustration = $this->getViewFileUrl('Algolia_AlgoliaSearch::images/icon-bo
     <p>Landing pages are created with the aim to boost your marketing activities with strong focus on SEO. They are based on Algolia's Query Rules.</p>
     <p>Read more about the landing page builder in our <a href="#">Documentation</a>.</p>
 </div>
+
+<?php if ($view->getNbOfLandingPages() === 0) : ?>
+    <div class="algolia-no-lp">
+        <span><img src="<?php echo $emptyStateIllustration ?>" /></span>
+        <p class="bigtext">No landing pages yet!</p>
+        <p><a class="new-lp" href="<?php echo $this->getUrl('*/*/edit'); ?>" >Create a new landing page</a></p>
+    </div>
+<?php endif ?>

@@ -30,6 +30,34 @@
     cursor : pointer;
 }
 
+.algolia-no-lp + .admin__data-grid-outer-wrap {
+    display : none;
+}
+
+.algolia-no-lp {
+    text-align: center;
+    margin : 20px auto 50px;
+}
+
+.algolia-no-lp .bigtext{
+    font-weight: bold;
+    font-size : 1.6rem;
+    margin : 20px auto 40px;
+}
+
+.algolia-no-lp .new-lp{
+    background-color : #007BDB;
+    font-weight: bold;
+    color : white;
+    padding : 15px;
+    margin : 30px auto 15px;
+    font-size : 1.6rem;
+}
+
+.algolia-no-lp .new-lp:hover{
+    text-decoration : none;
+}
+
 /* FORM */
 .merchandising-tutorial {
     background-color : #F5FAFD;
