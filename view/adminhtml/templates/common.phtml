@@ -179,6 +179,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	], function ($, validator, mage) {
 		'use strict';
 
+      $(".close-box").click(function() {
+        $(this).parent().hide();
+      });
+
 		validator.addRule(
 			'validate-url-unicity',
 			function (value) {

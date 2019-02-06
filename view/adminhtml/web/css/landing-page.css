@@ -12,12 +12,22 @@
     border : 1px solid #E2F0FA;
     padding : 20px;
     margin : 5px 0 20px;
+    position:relative;
 }
 
 .algolia-suggestions-header .book{
     float : left;
     margin-right : 20px;
     margin-top: 5px;
+}
+
+.algolia-suggestions-header .close-box {
+    position : absolute;
+    right : 15px;
+    top : 10px;
+    color : grey;
+    font-size: 1.6rem;
+    cursor : pointer;
 }
 
 /* FORM */
@@ -1160,4 +1170,10 @@ a.ais-current-refined-values--link:hover {
 .algolia-suggestions-header-wbg .stars{
     float: left;
     margin: 0 20px 0 0;
+}
+
+/* FORM */
+
+.form-inline .algolia-suggestions-header {
+    width : auto;
 }
