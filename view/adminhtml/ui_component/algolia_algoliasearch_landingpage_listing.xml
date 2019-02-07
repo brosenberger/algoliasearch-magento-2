@@ -8,7 +8,7 @@
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">clear</item>
-                <item name="label" xsi:type="string" translate="true">Add landing page</item>
+                <item name="label" xsi:type="string" translate="true">Create a new landing page</item>
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">*/*/edit</item>
             </item>
@@ -99,28 +99,28 @@
                 </item>
             </argument>
         </column>
-        <column name="date_from" >
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">dateRange</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
-                    <item name="dataType" xsi:type="string">date</item>
-                    <item name="dateFormat" xsi:type="string">MMM d, y</item>
-                    <item name="label" xsi:type="string" translate="true">Timeframe (date from)</item>
-                </item>
-            </argument>
-        </column>
-        <column name="date_to" >
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">dateRange</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
-                    <item name="dataType" xsi:type="string">date</item>
-                    <item name="dateFormat" xsi:type="string">MMM d, y</item>
-                    <item name="label" xsi:type="string" translate="true">Timeframe (date to)</item>
-                </item>
-            </argument>
-        </column>
+        <!--<column name="date_from" >-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="filter" xsi:type="string">dateRange</item>-->
+                    <!--<item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>-->
+                    <!--<item name="dataType" xsi:type="string">date</item>-->
+                    <!--<item name="dateFormat" xsi:type="string">MMM d, y</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Timeframe (date from)</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</column>-->
+        <!--<column name="date_to" >-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="filter" xsi:type="string">dateRange</item>-->
+                    <!--<item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>-->
+                    <!--<item name="dataType" xsi:type="string">date</item>-->
+                    <!--<item name="dateFormat" xsi:type="string">MMM d, y</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Timeframe (date to)</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</column>-->
         <column name="is_active">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Algolia\AlgoliaSearch\Model\Source\LandingPageStatuses</item>

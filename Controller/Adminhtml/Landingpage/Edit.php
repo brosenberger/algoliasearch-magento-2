@@ -28,17 +28,17 @@ class Edit extends AbstractAction
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
 
-        $breadcrumbTitle = $landingPage->getId() ? __('Edit Landing Page') : __('New Landing Page');
+        $breadcrumbTitle = $landingPage->getId() ? __('Edit landing page') : __('New landing page');
         $resultPage
             ->setActiveMenu('Algolia_AlgoliaSearch::manage')
-            ->addBreadcrumb(__('Landing Pages'), __('Landing Pages'))
+            ->addBreadcrumb(__('Landing pages'), __('Landing pages'))
             ->addBreadcrumb($breadcrumbTitle, $breadcrumbTitle);
 
         $resultPage->getConfig()->getTitle()->prepend(__('Landing Pages'));
         $resultPage->getConfig()->getTitle()->prepend(
             $landingPage->getId()
-                ? __('Edit Landing Page "%1"', $landingPage->getTitle())
-                : __('New Landing Page')
+                ? __('Edit landing page "%1"', $landingPage->getTitle())
+                : __('New landing page')
         );
 
         return $resultPage;
