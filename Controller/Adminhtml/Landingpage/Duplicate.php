@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Controller\Adminhtml\LandingPage;
+namespace Algolia\AlgoliaSearch\Controller\Adminhtml\Landingpage;
 
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;

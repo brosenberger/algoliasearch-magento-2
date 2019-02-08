@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Controller\Adminhtml\LandingPage;
+namespace Algolia\AlgoliaSearch\Controller\Adminhtml\Landingpage;
 
 use Algolia\AlgoliaSearch\Helper\MerchandisingHelper;
 use Algolia\AlgoliaSearch\Helper\ProxyHelper;
