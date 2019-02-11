@@ -38,6 +38,8 @@ abstract class AbstractButton
     /**
      * Return object
      *
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     *
      * @return int|null
      */
     public function getObject()
@@ -49,7 +51,7 @@ abstract class AbstractButton
             $landingPage->getResource()->load($landingPage, $modelId);
 
             return $landingPage;
-        } catch (NoSuchEntityException $e) {
+        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
         }
 
         return null;
