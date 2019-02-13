@@ -453,6 +453,8 @@ class ProductHelper
         $customData = $this->addInStock($defaultData, $customData, $product);
         $customData = $this->addStockQty($defaultData, $customData, $additionalAttributes, $product);
 
+        $customData = $this->addCatalogPermissions($customData, $product, $storeId);
+
         $subProducts = $this->getSubProducts($product);
 
         $customData = $this->addAdditionalAttributes($customData, $additionalAttributes, $product, $subProducts);
@@ -725,6 +727,18 @@ class ProductHelper
             if ($stockItem) {
                 $customData['stock_qty'] = (int) $stockItem->getQty();
             }
+        }
+
+        return $customData;
+    }
+
+    private function addCatalogPermissions($customData, Product $product, $storeId)
+    {
+        if ($this->configHelper->isCustomerGroupsEnabled($storeId)
+            && $this->configHelper->isCatalogPermissionsEnabled($storeId)) {
+
+            
+
         }
 
         return $customData;

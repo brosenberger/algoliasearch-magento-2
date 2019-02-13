@@ -104,6 +104,8 @@ class ConfigHelper
     const EXTRA_SETTINGS_ADDITIONAL_SECTIONS =
         'algoliasearch_extra_settings/extra_settings/additional_sections_extra_settings';
 
+    const CATALOG_PERMISSIONS_ENABLED = 'catalog/magento_catalogpermissions/enabled';
+
     private $configInterface;
     private $objectManager;
     private $currency;
@@ -304,6 +306,11 @@ class ConfigHelper
     public function isCustomerGroupsEnabled($storeId = null)
     {
         return $this->configInterface->isSetFlag(self::CUSTOMER_GROUPS_ENABLE, ScopeInterface::SCOPE_STORE, $storeId);
+    }
+
+    public function isCatalogPermissionsEnabled($storeId = null)
+    {
+        return $this->configInterface->isSetFlag(self::CATALOG_PERMISSIONS_ENABLED, ScopeInterface::SCOPE_STORE, $storeId);
     }
 
     public function shouldRemovePubDirectory($storeId = null)
