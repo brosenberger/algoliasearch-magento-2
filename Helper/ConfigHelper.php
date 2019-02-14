@@ -856,6 +856,15 @@ class ConfigHelper
         return ['attributesToRetrieve' => $attributes];
     }
 
+    public function getAttributesToFilter($groupId)
+    {
+
+        $filterString = 'catalog_permissions.customer_group_' . $groupId . ' = 0';
+        // $this->eventManager->dispatch('algolia_get_attributes_to_filter', ['filter_string' => $filterString]);
+
+        return ['filters' => $filterString];
+    }
+
     public function isEnabledSynonyms($storeId = null)
     {
         return $this->configInterface->isSetFlag(self::ENABLE_SYNONYMS, ScopeInterface::SCOPE_STORE, $storeId);

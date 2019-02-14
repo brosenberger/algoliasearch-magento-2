@@ -1,38 +1,23 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Observer;
+namespace Algolia\AlgoliaSearch\Model\Observer\CatalogPermissions;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Customer\Model\ResourceModel\Group\Collection as CustomerGroupCollection;
 use Algolia\AlgoliaSearch\Factory\CatalogPermissionsFactory;
 
 class ProductPermissions implements ObserverInterface
 {
-    const CATALOG_PERMISSIONS_ENABLED_CONFIG_PATH = 'catalog/magento_catalogpermissions/enabled';
-
-    private $scopeConfig;
     private $permissionsFactory;
     private $customerGroupCollection;
 
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
         CustomerGroupCollection $customerGroupCollection,
         CatalogPermissionsFactory $permissionsFactory
     ) {
-        $this->scopeConfig = $scopeConfig;
         $this->customerGroupCollection = $customerGroupCollection;
         $this->permissionsFactory = $permissionsFactory;
-    }
-
-    public function isCatalogPermissionsEnabled($storeId)
-    {
-        return $this->scopeConfig->isSetFlag(
-            self::CATALOG_PERMISSIONS_ENABLED_CONFIG_PATH,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-            $storeId
-        );
     }
 
     public function execute(Observer $observer)
@@ -43,7 +28,7 @@ class ProductPermissions implements ObserverInterface
         $product = $observer->getData('productObject');
         $storeId = $product->getStoreId();
 
-        if (!$this->isCatalogPermissionsEnabled($storeId)) {
+        if (!$this->permissionsFactory->isCatalogPermissionsEnabled($storeId)) {
             return $this;
         }
 

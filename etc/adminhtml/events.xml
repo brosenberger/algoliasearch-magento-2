@@ -36,9 +36,12 @@
     </event>
 
     <event name="algolia_after_create_product_object">
-        <observer name="algoliasearch_product_permissions" instance="Algolia\AlgoliaSearch\Model\Observer\ProductPermissions" />
+        <observer name="algoliasearch_product_permissions" instance="Algolia\AlgoliaSearch\Model\Observer\CatalogPermissions\ProductPermissions" />
     </event>
     <event name="algolia_after_create_category_object">
-        <observer name="algoliasearch_category_permissions" instance="Algolia\AlgoliaSearch\Model\Observer\CategoryPermissions" />
+        <observer name="algoliasearch_category_permissions" instance="Algolia\AlgoliaSearch\Model\Observer\CatalogPermissions\CategoryPermissions" />
     </event>
+    <!-- <event name="algolia_get_retrievable_attributes">
+        <observer name="algoliasearch_category_permissions" instance="Algolia\AlgoliaSearch\Model\Observer\CatalogPermissions\ApplyProductPermissionsFilter" />
+    </event> -->
 </config>
