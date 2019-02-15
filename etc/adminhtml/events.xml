@@ -41,7 +41,4 @@
     <event name="algolia_after_create_category_object">
         <observer name="algoliasearch_category_permissions" instance="Algolia\AlgoliaSearch\Model\Observer\CatalogPermissions\CategoryPermissions" />
     </event>
-    <!-- <event name="algolia_get_retrievable_attributes">
-        <observer name="algoliasearch_category_permissions" instance="Algolia\AlgoliaSearch\Model\Observer\CatalogPermissions\ApplyProductPermissionsFilter" />
-    </event> -->
 </config>

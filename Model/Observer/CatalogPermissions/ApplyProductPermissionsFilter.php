@@ -5,23 +5,18 @@ namespace Algolia\AlgoliaSearch\Model\Observer\CatalogPermissions;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Algolia\AlgoliaSearch\Factory\CatalogPermissionsFactory;
-use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Store\Model\StoreManager;
-
 
 class ApplyProductPermissionsFilter implements ObserverInterface
 {
     private $permissionsFactory;
-    private $customerSession;
     private $storeManager;
 
     public function __construct(
         CatalogPermissionsFactory $permissionsFactory,
-        CustomerSession $customerSession,
         StoreManager $storeManager
     ) {
         $this->permissionsFactory = $permissionsFactory;
-        $this->customerSession = $customerSession;
         $this->storeManager = $storeManager;
     }
 
@@ -33,9 +28,10 @@ class ApplyProductPermissionsFilter implements ObserverInterface
         }
 
         /** @var \Magento\Framework\DataObject $transport */
-        $attributes = $observer->getData('attributes');
-        $customerGroupId = $this->customerSession->getCustomerGroupId();
+        $transport = $observer->getData('filter_object');
+        $customerGroupId = $observer->getData('customer_group_id');
 
+        $transport->setData('catalog_permissions', 'catalog_permissions.customer_group_' . $customerGroupId . ' = 1');
 
         return $this;
     }

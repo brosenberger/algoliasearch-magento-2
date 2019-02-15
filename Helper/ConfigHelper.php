@@ -858,11 +858,15 @@ class ConfigHelper
 
     public function getAttributesToFilter($groupId)
     {
+        $transport = new DataObject();
+        $this->eventManager->dispatch('algolia_get_attributes_to_filter',
+            ['filter_object' => $transport, 'customer_group_id' => $groupId]);
+        $attributes = $transport->getData();
 
-        $filterString = 'catalog_permissions.customer_group_' . $groupId . ' = 0';
-        // $this->eventManager->dispatch('algolia_get_attributes_to_filter', ['filter_string' => $filterString]);
+        $attributes = array_unique($attributes);
+        $attributes = array_values($attributes);
 
-        return ['filters' => $filterString];
+        return count($attributes) ? ['filters' => implode(' AND ', $attributes)] : [];
     }
 
     public function isEnabledSynonyms($storeId = null)
