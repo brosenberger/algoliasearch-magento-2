@@ -6,18 +6,22 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Customer\Model\ResourceModel\Group\Collection as CustomerGroupCollection;
 use Algolia\AlgoliaSearch\Factory\CatalogPermissionsFactory;
+use Algolia\AlgoliaSearch\Factory\SharedCatalogFactory;
 
 class ProductPermissions implements ObserverInterface
 {
     private $permissionsFactory;
     private $customerGroupCollection;
+    private $sharedCatalogFactory;
 
     public function __construct(
         CustomerGroupCollection $customerGroupCollection,
-        CatalogPermissionsFactory $permissionsFactory
+        CatalogPermissionsFactory $permissionsFactory,
+        SharedCatalogFactory $sharedCatalogFactory
     ) {
         $this->customerGroupCollection = $customerGroupCollection;
         $this->permissionsFactory = $permissionsFactory;
+        $this->sharedCatalogFactory = $sharedCatalogFactory;
     }
 
     public function execute(Observer $observer)
@@ -32,11 +36,11 @@ class ProductPermissions implements ObserverInterface
             return $this;
         }
 
+        $permissions = [];
+
         /** @var \Magento\CatalogPermissions\Model\Permission\Index $permissionsIndex */
         if ($permissionsIndex = $this->permissionsFactory->getPermissionsIndex()) {
             $permissionsHelper = $this->permissionsFactory->getPermissionsHelper();
-
-            $permissions = [];
 
             $collection = $this->customerGroupCollection;
             foreach ($collection as $customerGroup) {
@@ -51,10 +55,18 @@ class ProductPermissions implements ObserverInterface
                 ) {
                     $permissions['customer_group_' . $customerGroupId] = 0;
                 }
+
+                if ($this->sharedCatalogFactory->isSharedCatalogEnabled($storeId)) {
+                    /** @var \Magento\SharedCatalog\Model\ResourceModel\ProductItem $sharedCatalog */
+                    if (!$this->sharedCatalogFactory->isInSharedCatalogForCustomerGroup($product, $customerGroupId)) {
+                        $permissions['customer_group_' . $customerGroupId] = 0;
+                    }
+                }
             }
+        }
 
+        if (count($permissions)) {
             $transport->setData('catalog_permissions', $permissions);
-
         }
 
         return $this;

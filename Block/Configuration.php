@@ -154,6 +154,10 @@ class Configuration extends Algolia implements CollectionDataSourceInterface
             'indexName' => $coreHelper->getBaseIndexName(),
             'apiKey' => $algoliaHelper->generateSearchSecuredApiKey(
                 $config->getSearchOnlyAPIKey(),
+                $config->getAttributesToRetrieve($customerGroupId)
+            ),
+            'catalogApiKey' => $algoliaHelper->generateSearchSecuredApiKey(
+                $config->getSearchOnlyAPIKey(),
                 array_merge(
                     $config->getAttributesToRetrieve($customerGroupId),
                     $config->getAttributesToFilter($customerGroupId)
