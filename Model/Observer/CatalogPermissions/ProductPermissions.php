@@ -58,7 +58,7 @@ class ProductPermissions implements ObserverInterface
 
                 if ($this->sharedCatalogFactory->isSharedCatalogEnabled($storeId)) {
                     /** @var \Magento\SharedCatalog\Model\ResourceModel\ProductItem $sharedCatalog */
-                    if (!$this->sharedCatalogFactory->isInSharedCatalogForCustomerGroup($product, $customerGroupId)) {
+                    if (!$this->sharedCatalogFactory->isProductInSharedCatalogForCustomerGroup($product, $customerGroupId)) {
                         $permissions['customer_group_' . $customerGroupId] = 0;
                     }
                 }

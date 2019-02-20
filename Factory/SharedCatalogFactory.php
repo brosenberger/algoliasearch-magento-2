@@ -2,10 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Factory;
 
+use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\Product;
 use Magento\Framework\Module\Manager;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\SharedCatalog\Model\CatalogPermissionManagement;
 
 class SharedCatalogFactory
 {
@@ -45,7 +47,13 @@ class SharedCatalogFactory
             $this->objectManager->create('\Magento\SharedCatalog\Model\ResourceModel\ProductItem') : false;
     }
 
-    public function isInSharedCatalogForCustomerGroup(Product $product, $customerGroupId)
+    public function getSharedCatalogCategoryResource()
+    {
+        return $this->isSharedCatalogModuleEnabled() ?
+            $this->objectManager->create('\Magento\SharedCatalog\Model\ResourceModel\Permission') : false;
+    }
+
+    public function isProductInSharedCatalogForCustomerGroup(Product $product, $customerGroupId)
     {
         /** @var \Magento\SharedCatalog\Model\ResourceModel\ProductItem $resourceModel */
         $resourceModel = $this->getSharedCatalogProductItemResource();
@@ -62,11 +70,29 @@ class SharedCatalogFactory
         );
 
         $shared = $connection->fetchRow($select);
-        if ($shared) {
-            return true;
-        }
+        return $shared ? true : false;
+    }
 
-        return false;
+    public function isCategoryInSharedCatalogForCustomerGroup(Category $category, $customerGroupId)
+    {
+        /** @var \Magento\SharedCatalog\Model\ResourceModel\Permission $resourceModel */
+        $resourceModel = $this->getSharedCatalogCategoryResource();
+        $connection = $resourceModel->getConnection();
+
+        $select = $connection->select()->from(
+            ['shared_catalog_category' => $resourceModel->getMainTable()]
+        )->where(
+            'customer_group_id = ?',
+            $customerGroupId
+        )->where(
+            'category_id = ?',
+            $category->getId()
+        )->where(
+            'permission = ' . \Magento\CatalogPermissions\Model\Permission::PERMISSION_ALLOW
+        );
+
+        $shared = $connection->fetchRow($select);
+        return $shared ? true : false;
     }
 
 }

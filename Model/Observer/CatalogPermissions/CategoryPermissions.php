@@ -6,18 +6,22 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Customer\Model\ResourceModel\Group\Collection as CustomerGroupCollection;
 use Algolia\AlgoliaSearch\Factory\CatalogPermissionsFactory;
+use Algolia\AlgoliaSearch\Factory\SharedCatalogFactory;
 
 class CategoryPermissions implements ObserverInterface
 {
     private $permissionsFactory;
     private $customerGroupCollection;
+    private $sharedCatalogFactory;
 
     public function __construct(
         CustomerGroupCollection $customerGroupCollection,
-        CatalogPermissionsFactory $permissionsFactory
+        CatalogPermissionsFactory $permissionsFactory,
+        SharedCatalogFactory $sharedCatalogFactory
     ) {
         $this->customerGroupCollection = $customerGroupCollection;
         $this->permissionsFactory = $permissionsFactory;
+        $this->sharedCatalogFactory = $sharedCatalogFactory;
     }
 
     public function execute(Observer $observer)
@@ -42,6 +46,13 @@ class CategoryPermissions implements ObserverInterface
                 $restrictedIds = $permissionsIndex->getRestrictedCategoryIds($customerGroupId, null);
 
                 $permissions['customer_group_' . $customerGroupId] = in_array($category->getId(), $restrictedIds) ? 0 : 1;
+            }
+
+            if ($this->sharedCatalogFactory->isSharedCatalogEnabled($storeId)) {
+                /** @var \Magento\SharedCatalog\Model\ResourceModel\ProductItem $sharedCatalog */
+                if (!$this->sharedCatalogFactory->isCategoryInSharedCatalogForCustomerGroup($category, $customerGroupId)) {
+                    $permissions['customer_group_' . $customerGroupId] = 0;
+                }
             }
 
             $transport->setData('catalog_permissions', $permissions);
