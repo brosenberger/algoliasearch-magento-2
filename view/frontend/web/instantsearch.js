@@ -81,7 +81,7 @@ requirejs(['algoliaBundle','Magento_Catalog/js/price-utils'], function(algoliaBu
 		
 		var instantsearchOptions = {
 			appId: algoliaConfig.applicationId,
-			apiKey: algoliaConfig.catalogApiKey,
+			apiKey: algoliaConfig.apiKey,
 			indexName: algoliaConfig.indexName + '_products',
 			searchParameters: {
 				hitsPerPage: algoliaConfig.hitsPerPage,
